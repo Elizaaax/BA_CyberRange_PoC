@@ -1,5 +1,29 @@
+# Global variables for controlling scenario execution
+
+# PoC1 control
 run_poc1: true
-poc1_phases: [ 'reconnaissance', 'initial-access', 'action-on-objectives' ]
+poc1_phases:
+  - reconnaissance
+  - initial-access
+  - privilege-escalation
+  - persistence
+  - action-on-objectives
+
+# PoC2 control
 run_poc2: false
-poc2_phases: [ 'reconnaissance', 'initial-access' ]
+poc2_phases:
+  - reconnaissance
+  - initial-access
+  - privilege-escalation
+  - persistence
+  - action-on-objectives
+
+# Chain scenario control
 run_chain: false
+
+# Common variables (example IP addresses)
+attacker_ip: 192.168.254.130
+collector_ip: 192.168.254.131
+web_victim_ip: 192.168.254.129
+privesc_target_ip: 192.168.254.132
+

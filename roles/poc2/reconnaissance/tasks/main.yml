@@ -1,0 +1,16 @@
+---
+- name: Recon - Scan web-victim for XSS vulnerabilities
+  shell: "whatweb http://192.168.254.129/DVWA/"
+  register: recon_result
+
+- name: Show WhatWeb results
+  debug:
+    var: recon_result.stdout
+
+- name: Recon - Find potential XSS input fields
+  shell: "curl -s http://192.168.254.129/DVWA/vulnerabilities/xss_s/"
+  register: xss_page
+
+- name: Show potential XSS page content
+  debug:
+    var: xss_page.stdout

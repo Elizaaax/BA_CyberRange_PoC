@@ -1,7 +1,17 @@
 ---
-- name: Recon - Check web service
+- name: Recon - Port scan on web-victim
   shell: "nmap -p 80 -sV 192.168.254.129"
   register: recon_result
 
-- debug:
+- name: Show Recon results
+  debug:
     var: recon_result.stdout
+
+- name: Recon - Identify web technologies
+  shell: "whatweb http://192.168.254.129/DVWA/"
+  register: whatweb_result
+
+- name: Show WhatWeb results
+  debug:
+    var: whatweb_result.stdout
+
