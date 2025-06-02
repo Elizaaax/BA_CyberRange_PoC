@@ -1,3 +1,5 @@
-attacker_ip: 192.168.254.130
-collector_ip: 192.168.254.131
-web_root: /var/www/html/DVWA/hackable/uploads
+run_poc1: true
+poc1_phases: [ 'reconnaissance', 'initial-access', 'action-on-objectives' ]
+run_poc2: false
+poc2_phases: [ 'reconnaissance', 'initial-access' ]
+run_chain: false

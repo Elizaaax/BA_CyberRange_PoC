@@ -16,6 +16,20 @@
 
 - hosts: attacker
   become: yes
-  roles:
-    - poc1-silent-upload
-    - poc2-cookie-harvest
+  tasks:
+    - name: PoC1 – only selected phases
+      include_role:
+        name: poc1/{{ item }}
+      loop: "{{ poc1_phases }}"
+      when: run_poc1
+
+    - name: PoC2 – only selected phases
+      include_role:
+        name: poc2/{{ item }}"
+      loop: "{{ poc2_phases }}"
+      when: run_poc2
+
+    - name: Chain-Szenario
+      include_role:
+        name: chain
+      when: run_chain
