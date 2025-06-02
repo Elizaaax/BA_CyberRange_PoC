@@ -1,0 +1,21 @@
+---
+- hosts: web-victim
+  become: yes
+  roles:
+    - setup-web-victim
+
+- hosts: privesc-target
+  become: yes
+  roles:
+    - setup-privesc-target
+
+- hosts: collector
+  become: yes
+  roles:
+    - setup-collector
+
+- hosts: attacker
+  become: yes
+  roles:
+    - poc1-silent-upload
+    - poc2-cookie-harvest
