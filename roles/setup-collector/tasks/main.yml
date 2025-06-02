@@ -1,0 +1,14 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Python3
+  apt:
+    name: python3
+    state: present
+
+- name: Start simple HTTP server to collect data
+  shell: "nohup python3 -m http.server 8080 &"
+  args:
+    executable: /bin/bash

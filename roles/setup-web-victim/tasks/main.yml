@@ -1,0 +1,31 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install required packages
+  apt:
+    name:
+      - apache2
+      - php
+      - libapache2-mod-php
+      - mariadb-server
+      - git
+    state: present
+
+- name: Clone DVWA repository
+  git:
+    repo: https://github.com/digininja/DVWA.git
+    dest: /var/www/html/DVWA
+
+- name: Set correct permissions for DVWA
+  file:
+    path: /var/www/html/DVWA
+    recurse: yes
+    owner: www-data
+    group: www-data
+
+- name: Restart Apache
+  systemd:
+    name: apache2
+    state: restarted

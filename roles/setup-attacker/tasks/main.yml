@@ -1,0 +1,24 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install required tools on attacker machine
+  apt:
+    name:
+      - nmap
+      - curl
+      - git
+      - netcat-traditional
+      - sshpass
+      - python3-pip
+    state: present
+
+- name: Clone sqlmap for advanced SQLi testing (optional)
+  git:
+    repo: https://github.com/sqlmapproject/sqlmap.git
+    dest: /home/{{ ansible_user }}/sqlmap
+
+- name: Install mitmproxy (optional)
+  pip:
+    name: mitmproxy

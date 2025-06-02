@@ -27,3 +27,8 @@ collector_ip: 192.168.254.131
 web_victim_ip: 192.168.254.129
 privesc_target_ip: 192.168.254.132
 
+# Collector output file for stolen cookie
+collector_cookie_file: /tmp/collector_output.txt
+
+# Optional: Control individual phases in chain role
+run_persistence_in_chain: true
