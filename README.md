@@ -7,7 +7,7 @@
 
 This repository contains **REAL ATTACK TECHNIQUES** and **FUNCTIONAL MALWARE COMPONENTS** including:
 - **PHP Webshells** that execute arbitrary commands
-- **Privilege Escalation Exploits** using real SUID techniques  
+- **Privilege Escalation Exploits** using real SUID techniques
 - **Persistent Backdoors** via cron jobs and reverse shells
 - **Data Exfiltration** mechanisms
 

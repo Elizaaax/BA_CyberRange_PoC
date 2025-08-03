@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] - 2025-01-XX
+## [1.0.0] - 2025-01-15
 
 ### Added
 - Initial release of BA_CyberRange_PoC
@@ -45,7 +45,7 @@ All notable changes to this project will be documented in this file.
 - Responsible disclosure practices
 - Clear security documentation
 
-## [0.9.0] - 2025-01-XX (Pre-release)
+## [0.9.0] - 2025-01-10 (Pre-release)
 
 ### Added
 - Basic PoC structure

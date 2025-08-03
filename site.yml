@@ -27,8 +27,6 @@
   roles:
     - setup-attacker
 
-
-
 - name: Run PoC1 with selected phases
   hosts: attacker
   become: yes
@@ -58,5 +56,3 @@
         name: "poc3/{{ item }}"
       loop: "{{ poc3_phases }}"
       when: run_poc3
-
-
