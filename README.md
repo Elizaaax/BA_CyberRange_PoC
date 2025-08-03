@@ -1,4 +1,3 @@
-```markdown
 # A_CyberRange_PoC
 
 ## **CRITICAL SECURITY WARNING**
@@ -147,5 +146,3 @@ The system architecture and scenario design are based on the FASAC model (Scenar
 ## License
 
 This project is licensed for academic and research purposes. Contact [@elizaaax](https://github.com/elizaaax) for more details.
-
-```
