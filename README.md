@@ -27,9 +27,6 @@ This repository contains the implementation of three modular proof-of-concept (P
 ```
 
 ├── .gitignore                   # Git ignore patterns
-├── requirements.txt              # Python dependencies
-├── CONTRIBUTING.md              # Development guidelines
-├── CHANGELOG.md                 # Version history
 ├── group\_vars/                 # Central variables (IP addresses, toggles, credentials)
 ├── site.yml                     # Central playbook to launch setup or PoC chains
 ├── roles/
@@ -78,9 +75,6 @@ Each PoC is built from reusable roles, separated by adversarial phase:
 # Clone the repository
 git clone https://github.com/elizaaax/BA_CyberRange_PoC.git
 cd BA_CyberRange_PoC
-
-# Install optional Python dependencies (optional)
-pip install -r requirements.txt
 ```
 
 ### Provision the Environment
@@ -120,7 +114,7 @@ ansible-playbook site.yml -e run_poc3=true -e poc3_phases='["reconnaissance", "i
 - **Infrastructure as Code**: Complete automation with Ansible
 - **Educational Focus**: Designed for learning web penetration testing
 - **Professional Standards**: Follows Ansible best practices
-- **Error Handling**: Robust execution with comprehensive error handling
+- **Error Handling**: Robust execution with proper error handling
 - **Variable Management**: Centralized configuration for easy customization
 
 ## 🔒 Security Notice
@@ -150,17 +144,7 @@ The system architecture and scenario design are based on the FASAC model (Scenar
 * [Ansible Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html)
 * [FASAC Framework](https://www.researchgate.net/publication/example) - Framework for Attack Scenario Analysis and Classification
 
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines.
-
 ## 📝 License
-
-This project is licensed for academic and research purposes. Contact [@elizaaax](https://github.com/elizaaax) for more details.
-
----
-
-## License
 
 This project is licensed for academic and research purposes. Contact [@elizaaax](https://github.com/elizaaax) for more details.
 
