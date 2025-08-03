@@ -18,8 +18,7 @@ poc2_phases:
   - persistence
   - action-on-objectives
 
-# Chain scenario control
-run_chain: false
+
 
 # PoC3 control
 run_poc3: false

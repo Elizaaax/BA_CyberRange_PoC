@@ -105,10 +105,10 @@ ansible-playbook site.yml -e run_poc2=true -e poc2_phases='["reconnaissance", "i
 ### Run PoC 3 (Hybrid Chain)
 
 ```bash
-# Option 1: Using run_chain variable
-ansible-playbook site.yml -e run_chain=true
+# Run PoC3 with all phases
+ansible-playbook site.yml -e run_poc3=true
 
-# Option 2: Using run_poc3 variable with specific phases
+# Run PoC3 with specific phases
 ansible-playbook site.yml -e run_poc3=true -e poc3_phases='["reconnaissance", "initial-access", "privilege-escalation", "persistence", "action-on-objectives"]'
 ```
 

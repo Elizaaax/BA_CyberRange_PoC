@@ -57,7 +57,7 @@
       include_role:
         name: "poc3/{{ item }}"
       loop: "{{ poc3_phases }}"
-      when: run_poc3 or run_chain
+      when: run_poc3
 
 - name: Cleanup and Restore Systems
   hosts: all
