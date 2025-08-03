@@ -18,8 +18,6 @@ poc2_phases:
   - persistence
   - action-on-objectives
 
-
-
 # PoC3 control
 run_poc3: false
 poc3_phases:
@@ -49,5 +47,4 @@ ssh_user: "user"
 # Cookie values for session hijacking (educational purposes)
 stolen_cookie_value: "stolen_session_id_12345"
 
-# Cleanup control variables
-run_cleanup: false
+

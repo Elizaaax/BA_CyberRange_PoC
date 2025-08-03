@@ -59,10 +59,4 @@
       loop: "{{ poc3_phases }}"
       when: run_poc3
 
-- name: Cleanup and Restore Systems
-  hosts: all
-  become: yes
-  tags: cleanup
-  roles:
-    - cleanup
-  when: run_cleanup | default(false)
+
