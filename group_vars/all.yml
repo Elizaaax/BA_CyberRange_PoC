@@ -49,3 +49,6 @@ ssh_user: "user"
 
 # Cookie values for session hijacking (educational purposes)
 stolen_cookie_value: "stolen_session_id_12345"
+
+# Cleanup control variables
+run_cleanup: false

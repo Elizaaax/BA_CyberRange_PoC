@@ -1,6 +1,23 @@
 ```markdown
 # 🛡️ BA_CyberRange_PoC
 
+## ⚠️ **CRITICAL SECURITY WARNING** ⚠️
+
+**🚨 FOR EDUCATIONAL PURPOSES ONLY - USE AT YOUR OWN RISK 🚨**
+
+This repository contains **REAL ATTACK TECHNIQUES** and **FUNCTIONAL MALWARE COMPONENTS** including:
+- **PHP Webshells** that execute arbitrary commands
+- **Privilege Escalation Exploits** using real SUID techniques  
+- **Persistent Backdoors** via cron jobs and reverse shells
+- **Data Exfiltration** mechanisms
+
+**⚠️ IMPORTANT:**
+- **NEVER** use this in production environments
+- **NEVER** run against systems you don't own
+- **ALWAYS** use in isolated, controlled environments
+- **ALWAYS** follow responsible disclosure practices
+- **ALWAYS** ensure proper cleanup after testing
+
 This repository contains the implementation of three modular proof-of-concept (PoC) scenarios developed as part of the bachelor's thesis _"Developing a Modular Concept for Realistic Cyber Range Scenarios for Web Pentesting"_. The scenarios are designed using role-based virtualization, Infrastructure-as-Code principles, and reusable attack phases modeled after the FASAC framework.
 
 ---

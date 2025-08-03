@@ -3,7 +3,7 @@
   template:
     src: webshell.php.j2
     dest: /var/www/html/DVWA/hackable/uploads/shell.php
-    mode: '0755'
+    mode: '0644'
   delegate_to: "{{ groups['web-victim'][0] }}"
 
 - name: Initial Access - Test access to uploaded webshell
