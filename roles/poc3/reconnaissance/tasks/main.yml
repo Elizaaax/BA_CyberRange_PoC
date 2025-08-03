@@ -1,0 +1,9 @@
+---
+- name: PoC3 Recon – Scan for upload and XSS fields
+  shell: "whatweb http://{{ web_victim_ip }}/DVWA/"
+  register: recon_output
+  failed_when: false
+
+- name: Show WhatWeb output
+  debug:
+    var: recon_output.stdout

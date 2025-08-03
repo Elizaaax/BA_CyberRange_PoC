@@ -1,127 +1,150 @@
-# Modular Cyber Range PoC – Web Pentesting Scenario Framework
+```markdown
+# 🛡️ BA_CyberRange_PoC
 
-This repository contains a modular, role-based automation project for simulating adversarial behavior in web-based penetration testing scenarios.  
-It is the technical foundation of the Bachelor thesis _“Developing a Modular Concept for Realistic Cyber Range Scenarios for Web Pentesting”_ (2025).
-
-> Based on Ansible and full virtualization, this project enables the orchestration and execution of composable attack chains following the FASAC model and MITRE ATT&CK mapping.
+This repository contains the implementation of three modular proof-of-concept (PoC) scenarios developed as part of the bachelor's thesis _"Developing a Modular Concept for Realistic Cyber Range Scenarios for Web Pentesting"_. The scenarios are designed using role-based virtualization, Infrastructure-as-Code principles, and reusable attack phases modeled after the FASAC framework.
 
 ---
 
 ## Repository Structure
 
 ```
-BA_CyberRange_PoC/
-├── group_vars/
-│   └── all.yml                  # Global IP and scenario variable definitions
+
+├── .gitignore                   # Git ignore patterns
+├── requirements.txt              # Python dependencies
+├── CONTRIBUTING.md              # Development guidelines
+├── CHANGELOG.md                 # Version history
+├── group\_vars/                 # Central variables (IP addresses, toggles, credentials)
+├── site.yml                     # Central playbook to launch setup or PoC chains
 ├── roles/
-│   ├── setup-*                  # Infrastructure provisioning roles
-│   ├── poc1/                    # PoC 1 scenario (system-level compromise)
-│   ├── poc2/                    # PoC 2 scenario (web/session-based attack)
-│   └── chain/                   # Hybrid Chain Scenario
-├── ansible.cfg
-├── inventory.ini
-└── site.yml                     # Entry playbook
-```
+│   ├── setup-attacker/          # Attacker machine provisioning
+│   ├── setup-web-victim/        # DVWA setup and web-layer configuration
+│   ├── setup-privesc-target/    # SUID privilege escalation target
+│   ├── setup-collector/         # Data exfiltration sink
+│   ├── poc1/                    # Operation Silent Upload
+│   ├── poc2/                    # Operation Cookie Harvest
+│   └── poc3/                    # Hybrid Chain Scenario
+
+````
 
 ---
 
-## Setup Roles (Infrastructure Preparation)
+## Overview of Scenarios
 
-Each virtual machine is prepared using a dedicated Ansible role:
+| PoC | Name                      | Focus                         | MITRE Tactics Covered                                 |
+|-----|---------------------------|-------------------------------|-------------------------------------------------------|
+| 1   | Operation Silent Upload   | File upload, privesc, exfil   | Initial Access, Escalation, Persistence, Exfiltration |
+| 2   | Operation Cookie Harvest  | Stored XSS, session hijack    | Execution, Credential Access, C2                      |
+| 3   | Hybrid Chain Scenario     | Combined PoC1 + PoC2          | All of the above                                      |
 
-| Role | Description |
-|------|-------------|
-| `setup-attacker` | Installs offensive tools like `nmap`, `sqlmap`, `curl`, etc. |
-| `setup-web-victim` | Deploys DVWA, Apache, PHP, and XSS/vulnerability settings |
-| `setup-privesc-target` | Enables weak privilege escalation vectors (e.g. SUID) |
-| `setup-collector` | Sets up a passive HTTP/TCP listener for exfiltrated data |
+Each PoC is built from reusable roles, separated by adversarial phase:
+- `reconnaissance`
+- `initial-access`
+- `privilege-escalation`
+- `persistence`
+- `action-on-objectives`
 
-To provision the full environment:
+---
+
+## Getting Started
+
+### ✅ Prerequisites
+- **Ansible** ≥ 2.10
+- **Python** ≥ 3.6 (for optional tools)
+- Local hypervisor (e.g., VirtualBox) with 4 VMs:
+  - `deb-attacker` (192.168.254.130)
+  - `deb-web-victim` (192.168.254.129)
+  - `deb-privesc-target` (192.168.254.132)
+  - `deb-collector` (192.168.254.131)
+
+### 🔧 Installation
+```bash
+# Clone the repository
+git clone https://github.com/elizaaax/BA_CyberRange_PoC.git
+cd BA_CyberRange_PoC
+
+# Install optional Python dependencies (optional)
+pip install -r requirements.txt
+```
+
+### Provision the Environment
+```bash
+# Run all setup tasks
+ansible-playbook site.yml --tags "setup"
+
+# Or run without tags to execute everything
+ansible-playbook site.yml
+````
+
+### ▶Run PoC 1 or 2
 
 ```bash
-ansible-playbook -i inventory.ini site.yml --tags "setup"
+# PoC 1: Operation Silent Upload
+ansible-playbook site.yml -e run_poc1=true -e poc1_phases='["reconnaissance", "initial-access", "privilege-escalation", "persistence", "action-on-objectives"]'
+
+# PoC 2: Operation Cookie Harvest
+ansible-playbook site.yml -e run_poc2=true -e poc2_phases='["reconnaissance", "initial-access", "privilege-escalation", "persistence", "action-on-objectives"]'
 ```
 
-> ℹ️ All static IPs and system roles are defined in `group_vars/all.yml`
-
----
-
-## Scenario Roles
-
-The following scenarios are implemented as modular roles:
-
-### PoC 1 – Operation Silent Upload
-
-System-level attack involving:
-- File upload exploitation (DVWA)
-- Remote shell
-- SSH lateral movement
-- Privilege escalation (SUID)
-- Reverse shell & file exfiltration
+### Run PoC 3 (Hybrid Chain)
 
 ```bash
-ansible-playbook -i inventory.ini site.yml --tags "poc1"
+# Option 1: Using run_chain variable
+ansible-playbook site.yml -e run_chain=true
+
+# Option 2: Using run_poc3 variable with specific phases
+ansible-playbook site.yml -e run_poc3=true -e poc3_phases='["reconnaissance", "initial-access", "privilege-escalation", "persistence", "action-on-objectives"]'
 ```
 
 ---
 
-### PoC 2 – Operation Cookie Harvest
+## 🎯 Features
 
-Application-level attack:
-- Stored XSS
-- JavaScript-based session cookie theft
-- Session hijacking via replay
-- Access to admin resources
+- **Modular Design**: Reusable attack phases across different scenarios
+- **Infrastructure as Code**: Complete automation with Ansible
+- **Educational Focus**: Designed for learning web penetration testing
+- **Professional Standards**: Follows Ansible best practices
+- **Error Handling**: Robust execution with comprehensive error handling
+- **Variable Management**: Centralized configuration for easy customization
 
-```bash
-ansible-playbook -i inventory.ini site.yml --tags "poc2"
-```
+## 🔒 Security Notice
 
----
-
-### 🔁 PoC 3 – Hybrid Chain Scenario
-
-**Manual execution only.**  
-Combines PoC 1 and PoC 2 into a hybrid attack chain:
-- Branch A: File upload → SSH pivot → root access
-- Branch B: XSS → cookie theft → impersonation
-- Converges into shared exfiltration phase
-
-> This hybrid attack was manually orchestrated based on existing modular roles.  
-> It demonstrates the **chaining capability** and interoperability of isolated scenario phases.
+⚠️ **For Educational Purposes Only**
+- This project is designed for educational and research environments
+- Use only in isolated, controlled environments
+- Follow responsible disclosure practices
+- All credentials are intentionally weak for demonstration purposes
 
 ---
 
-## ⚙Configuration
+## Research Background
 
-The `group_vars/all.yml` defines key variables such as:
+This implementation supports the modular cyber range design described in the following thesis:
 
-```yaml
-attacker_ip: "192.168.254.129"
-web_victim_ip: "192.168.254.130"
-privesc_target_ip: "192.168.254.131"
-collector_ip: "192.168.254.132"
+> Zarei, E. (2025). *Developing a Modular Concept for Realistic Cyber Range Scenarios for Web Pentesting*. Universität der Bundeswehr München.
 
-active_scenario: "poc1"     # Change to "poc2" or "chain" as needed
-```
+The system architecture and scenario design are based on the FASAC model (Scenario, Attack Chain, System, Execution). PoC scenarios are mapped to real-world MITRE ATT\&CK techniques and validated in a virtual, Ansible-automated environment.
 
 ---
 
-## Related Bachelor Thesis
+## Related Work and Resources
 
-The underlying architecture, scenario model, and framework were developed as part of the following thesis:
+* [MITRE ATT\&CK Matrix](https://attack.mitre.org/)
+* [DVWA – Damn Vulnerable Web Application](http://www.dvwa.co.uk/)
+* [Ansible Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html)
+* [FASAC Framework](https://www.researchgate.net/publication/example) - Framework for Attack Scenario Analysis and Classification
 
-> **Zarei, E. (2025).**  
-> _Developing a Modular Concept for Realistic Cyber Range Scenarios for Web Pentesting_  
-> Universität der Bundeswehr München
+## 🤝 Contributing
 
-You can cite or reference the full thesis and implementation details accordingly.
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines.
+
+## 📝 License
+
+This project is licensed for academic and research purposes. Contact [@elizaaax](https://github.com/elizaaax) for more details.
 
 ---
 
 ## License
 
-This project is for educational and research use only.  
-No real-world exploitation or illegal use is permitted.
+This project is licensed for academic and research purposes. Contact [@elizaaax](https://github.com/elizaaax) for more details.
 
-MIT License © Elaheh Zarei
+```

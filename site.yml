@@ -2,24 +2,28 @@
 - name: Setup Web Victim
   hosts: web-victim
   become: yes
+  tags: setup
   roles:
     - setup-web-victim
 
 - name: Setup Privesc Target
   hosts: privesc-target
   become: yes
+  tags: setup
   roles:
     - setup-privesc-target
 
 - name: Setup Collector
   hosts: collector
   become: yes
+  tags: setup
   roles:
     - setup-collector
 
 - name: Setup Attacker
   hosts: attacker
   become: yes
+  tags: setup
   roles:
     - setup-attacker
 
@@ -43,7 +47,7 @@
       loop: "{{ poc2_phases }}"
       when: run_poc2
 
-- name: Run PoC3 (Hybrid Chain Scenario) with selected phases
+- name: Run PoC3 with selected phases
   hosts: attacker
   become: yes
   tasks:
@@ -51,4 +55,4 @@
       include_role:
         name: "poc3/{{ item }}"
       loop: "{{ poc3_phases }}"
-      when: run_poc3
+      when: run_poc3 or run_chain

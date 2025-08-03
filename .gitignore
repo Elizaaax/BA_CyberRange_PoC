@@ -1,0 +1,57 @@
+# Ansible specific files
+*.retry
+*.log
+.ansible/
+ansible.log
+
+# Python cache files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Log files
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Documentation build files
+docs/_build/
+site/
+
+# Test files
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Backup files
+*.orig
+*.rej 

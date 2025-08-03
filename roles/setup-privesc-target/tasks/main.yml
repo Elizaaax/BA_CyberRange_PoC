@@ -10,6 +10,6 @@
 
 - name: Ensure weak user exists for privilege escalation testing
   user:
-    name: user
-    password: "{{ 'password' | password_hash('sha512') }}"
+    name: "{{ ssh_user }}"
+    password: "{{ ssh_password | password_hash('sha512') }}"
     shell: /bin/bash

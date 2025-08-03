@@ -21,6 +21,15 @@ poc2_phases:
 # Chain scenario control
 run_chain: false
 
+# PoC3 control
+run_poc3: false
+poc3_phases:
+  - reconnaissance
+  - initial-access
+  - privilege-escalation
+  - persistence
+  - action-on-objectives
+
 # Common variables (example IP addresses)
 attacker_ip: 192.168.254.130
 collector_ip: 192.168.254.131
@@ -32,3 +41,11 @@ collector_cookie_file: /tmp/collector_output.txt
 
 # Optional: Control individual phases in chain role
 run_persistence_in_chain: true
+
+# Credentials (for educational purposes only)
+ssh_password: "password"
+dvwa_admin_password: "evilpass"
+ssh_user: "user"
+
+# Cookie values for session hijacking (educational purposes)
+stolen_cookie_value: "stolen_session_id_12345"
