@@ -43,10 +43,12 @@
       loop: "{{ poc2_phases }}"
       when: run_poc2
 
-- name: Run combined chain scenario
+- name: Run PoC3 (Hybrid Chain Scenario) with selected phases
   hosts: attacker
   become: yes
-  roles:
-    - role: chain
-      when: run_chain
-
+  tasks:
+    - name: PoC3 – selected phases
+      include_role:
+        name: "poc3/{{ item }}"
+      loop: "{{ poc3_phases }}"
+      when: run_poc3
