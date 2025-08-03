@@ -1,9 +1,9 @@
 ```markdown
-# 🛡️ BA_CyberRange_PoC
+# A_CyberRange_PoC
 
-## ⚠️ **CRITICAL SECURITY WARNING** ⚠️
+## **CRITICAL SECURITY WARNING**
 
-**🚨 FOR EDUCATIONAL PURPOSES ONLY - USE AT YOUR OWN RISK 🚨**
+**FOR EDUCATIONAL PURPOSES ONLY - USE AT YOUR OWN RISK**
 
 This repository contains **REAL ATTACK TECHNIQUES** and **FUNCTIONAL MALWARE COMPONENTS** including:
 - **PHP Webshells** that execute arbitrary commands
@@ -61,7 +61,7 @@ Each PoC is built from reusable roles, separated by adversarial phase:
 
 ## Getting Started
 
-### ✅ Prerequisites
+### Prerequisites
 - **Ansible** ≥ 2.10
 - **Python** ≥ 3.6 (for optional tools)
 - Local hypervisor (e.g., VirtualBox) with 4 VMs:
@@ -70,7 +70,7 @@ Each PoC is built from reusable roles, separated by adversarial phase:
   - `deb-privesc-target` (192.168.254.132)
   - `deb-collector` (192.168.254.131)
 
-### 🔧 Installation
+### Installation
 ```bash
 # Clone the repository
 git clone https://github.com/elizaaax/BA_CyberRange_PoC.git
@@ -108,7 +108,7 @@ ansible-playbook site.yml -e run_poc3=true -e poc3_phases='["reconnaissance", "i
 
 ---
 
-## 🎯 Features
+## Features
 
 - **Modular Design**: Reusable attack phases across different scenarios
 - **Infrastructure as Code**: Complete automation with Ansible
@@ -117,9 +117,9 @@ ansible-playbook site.yml -e run_poc3=true -e poc3_phases='["reconnaissance", "i
 - **Error Handling**: Robust execution with proper error handling
 - **Variable Management**: Centralized configuration for easy customization
 
-## 🔒 Security Notice
+## Security Notice
 
-⚠️ **For Educational Purposes Only**
+**For Educational Purposes Only**
 - This project is designed for educational and research environments
 - Use only in isolated, controlled environments
 - Follow responsible disclosure practices
@@ -144,7 +144,7 @@ The system architecture and scenario design are based on the FASAC model (Scenar
 * [Ansible Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html)
 * [FASAC Framework](https://www.researchgate.net/publication/example) - Framework for Attack Scenario Analysis and Classification
 
-## 📝 License
+## License
 
 This project is licensed for academic and research purposes. Contact [@elizaaax](https://github.com/elizaaax) for more details.
 
