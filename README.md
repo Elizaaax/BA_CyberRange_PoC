@@ -1,4 +1,4 @@
-# A_CyberRange_PoC
+# BA_CyberRange_PoC
 
 ## **CRITICAL SECURITY WARNING**
 
@@ -139,9 +139,9 @@ The system architecture and scenario design are based on the FASAC model (Scenar
 ## Related Work and Resources
 
 * [MITRE ATT\&CK Matrix](https://attack.mitre.org/)
-* [DVWA – Damn Vulnerable Web Application](http://www.dvwa.co.uk/)
+* [DVWA – Damn Vulnerable Web Application](https://github.com/digininja/DVWA)
 * [Ansible Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html)
-* [FASAC Framework](https://www.researchgate.net/publication/example) - Framework for Attack Scenario Analysis and Classification
+* [FASAC Framework](https://ieeexplore.ieee.org/document/10534799?denied=) – as described in the thesis
 
 ## License
 
