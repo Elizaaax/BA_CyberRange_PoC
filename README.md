@@ -10,7 +10,7 @@ This repository contains **REAL ATTACK TECHNIQUES** and **FUNCTIONAL MALWARE COM
 - **Persistent Backdoors** via cron jobs and reverse shells
 - **Data Exfiltration** mechanisms
 
-**⚠️ IMPORTANT:**
+**IMPORTANT:**
 - **NEVER** use this in production environments
 - **NEVER** run against systems you don't own
 - **ALWAYS** use in isolated, controlled environments
@@ -85,7 +85,7 @@ ansible-playbook site.yml --tags "setup"
 ansible-playbook site.yml
 ````
 
-### ▶Run PoC 1 or 2
+### Run PoC 1 or 2
 
 ```bash
 # PoC 1: Operation Silent Upload
